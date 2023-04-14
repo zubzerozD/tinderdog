@@ -1,16 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import 'axios'
+import {Box, Grid,button} from '@mui/material'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [imgdog, setImgdog] = useState()
+
+  const getDog = () =>{
+    fetch('https://dog.ceo/api/breeds/image/random')
+    .then(res => res.json())
+    .then(data => setImgdog(data.message))
+  }
+
+  useEffect(() => {
+    getDog()
+  }, [] )
 
   return (
     <div className="App">
       <p className="App-header" />
       <div>
-        <img src="https://images.dog.ceo/breeds/terrier-kerryblue/n02093859_3106.jpg" alt="" />
+        
       </div>
       <button>Rechazar</button>   <button>Match</button>
     </div>
