@@ -32,7 +32,7 @@ function App() {
     <div className="App">
       <p className="App-header" />
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={3}>
           <h2>Rechazados</h2>
           {rejectedDogs.map((dog, index) => (
             <div key={index}>
@@ -41,6 +41,14 @@ function App() {
           ))}
         </Grid>
         <Grid item xs={6}>
+          <div>
+            <img src={imgdog} alt="dog" style={{width:"50%"}} />
+          </div>
+          <div style={{display: "flex", justifyContent: "center"}}>
+            <button onClick={handleReject}>Rechazar</button>   <button onClick={handleMatch}>Match</button>
+          </div>
+        </Grid>
+        <Grid item xs={3}>
           <h2>Aceptados</h2>
           {acceptedDogs.map((dog, index) => (
             <div key={index}>
@@ -49,13 +57,8 @@ function App() {
           ))}
         </Grid>
       </Grid>
-      <div>
-        <img src={imgdog} alt="dog" style={{width:"250px"}} />
-      </div>
-      <Button onClick={handleReject}>Rechazar</Button>   <Button onClick={handleMatch}>Match</Button>
     </div>
   )
 }
 
 export default App
-
