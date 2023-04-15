@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import 'axios'
-import {Box, Grid,button} from '@mui/material'
 
 function App() {
   const [imgdog, setImgdog] = useState()
@@ -20,7 +19,7 @@ function App() {
     <div className="App">
       <p className="App-header" />
       <div>
-        
+        <img src={imgdog} alt="dog" style={{width:"250px"}} />
       </div>
       <button>Rechazar</button>   <button>Match</button>
     </div>
