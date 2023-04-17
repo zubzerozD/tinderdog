@@ -8,6 +8,14 @@ function App() {
   const [rejectedDogs, setRejectedDogs] = useState([])
   const [acceptedDogs, setAcceptedDogs] = useState([])
 
+  const [dogBreeds, setDogBreeds] = useState([])
+
+  useEffect(() => {
+    fetch('https://dog.ceo/api/breeds/list/all')
+      .then((res) => res.json())
+      .then((data) => setDogBreeds(Object.keys(data.message)))
+  }, [])
+
   const getDog = () => {
     fetch('https://dog.ceo/api/breeds/image/random')
       .then((res) => res.json())
@@ -19,12 +27,16 @@ function App() {
   }, [])
 
   const handleReject = () => {
-    setRejectedDogs([...rejectedDogs, imgdog])
+    const randomBreed = dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
+    const rejectedDog = { name: randomBreed, image: imgdog }
+    setRejectedDogs([...rejectedDogs, rejectedDog])
     getDog()
   }
 
   const handleAccept = () => {
-    setAcceptedDogs([...acceptedDogs, imgdog])
+    const randomBreed = dogBreeds[Math.floor(Math.random() * dogBreeds.length)]
+    const acceptedDog = { name: randomBreed, image: imgdog }
+    setAcceptedDogs([...acceptedDogs, acceptedDog])
     getDog()
   }
 
@@ -42,14 +54,14 @@ function App() {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-      <Box sx={{ width: '30%', minWidth: '250px', mr: 2 }}>
+      <Box sx={{ width: '100%', minWidth: '250px', mr: 10 }}>
         <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
           <Typography variant="h5" gutterBottom>
             Rechazados
           </Typography>
           {rejectedDogs.map((dog) => (
-            <Box key={dog} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 1 }}>
-              <img src={dog} alt="rejected-dog" style={{ width: '150px' }} />
+            <Box key={dog.image} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 1 }}>
+              <img src={dog.image} alt="rejected-dog" style={{ width: '150px' }} />
               <Button onClick={() => moveFromRejectedToAccepted(dog)}>Match</Button>
             </Box>
           ))}
@@ -73,14 +85,15 @@ function App() {
           </Box>
         </Paper>
       </Box>
-      <Box sx={{ width: '30%', minWidth: '250px', ml: 2 }}>
+      <Box sx={{ width: '100%', minWidth: '250px', ml: 10 }}>
         <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
           <Typography variant="h5" gutterBottom>
             Aceptados
           </Typography>
           {acceptedDogs.map((dog) => (
-            <Box key={dog} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 1 }}>
-              <img src={dog} alt="accepted-dog" style={{ width: '150px' }} />
+            <Box key={dog.image} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 1 }}>
+              <img src={dog.image} alt="accepted-dog" style={{ width: '150px' }} />
+              <Typography variant="subtitle1">{dog.name}</Typography>
               <Button onClick={() => moveFromAcceptedToRejected(dog)}>Rechazar</Button>
             </Box>
           ))}
