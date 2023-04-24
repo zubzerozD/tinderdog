@@ -88,31 +88,8 @@ function App() {
   return (
     <Container className="background">
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={4}>
-          <ListItem className="list-item">
-            <Paper style={{ opacity:0.9, height: 550, overflowY: "auto", borderRadius: 25 }} sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' ,mt:7 }}>
-              <Typography variant="h5" gutterBottom>
-                Rechazados
-              </Typography>
-              {rejectedDogs.map((dog) => (
-                <Box key={dog.image} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 1 }}>
-                  <Avatar
-                    src={dog.image}
-                    sx={{ width: 100, height: 100 }}
-                    alt="Imagen Avatar"
-                    style={{ marginRight: "10px" }}
-                  />
-                  <Typography variant="subtitle1" sx={{ mt: 1 }}>
-                    {dog.name}
-                  </Typography>
-                  <Button onClick={() => moveFromRejectedToAccepted(dog)}>Match</Button>
-                </Box>
-              ))}
-            </Paper>
-          </ListItem>
-        </Grid>
         <Grid style={{}} item xs={12} sm={4}>
-          <Paper style={{ opacity:0.9,borderRadius: 25, height: 555, width: 165 }} sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' ,mt:7}}>
+          <Paper style={{ opacity: 0.9, borderRadius: 25, height: 555, width: 165 }} sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', mt: 7 }}>
             <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: -2 }}>
               <img className="logo" src={logo} alt="zd" />
             </Box>
@@ -124,7 +101,7 @@ function App() {
         </Grid>
         <Grid item xs={12} sm={4}>
           <ListItem className="list-item">
-            <Paper style={{ opacity:0.9,height: 550, overflowY: "auto", borderRadius: 25 }} sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%',mt:7 }}>
+            <Paper style={{ opacity: 0.9, height: 550, overflowY: "auto", borderRadius: 25 }} sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', mt: 7 }}>
               <Typography variant="h5" gutterBottom>
                 Aceptados
               </Typography>
@@ -140,6 +117,29 @@ function App() {
                     {dog.name}
                   </Typography>
                   <Button onClick={() => moveFromAcceptedToRejected(dog)}>Rechazar</Button>
+                </Box>
+              ))}
+            </Paper>
+          </ListItem>
+        </Grid>
+        <Grid item xs={12} sm={4}>
+          <ListItem className="list-item">
+            <Paper style={{ opacity: 0.9, height: 550, overflowY: "auto", borderRadius: 25 }} sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', mt: 7 }}>
+              <Typography variant="h5" gutterBottom>
+                Rechazados
+              </Typography>
+              {rejectedDogs.map((dog) => (
+                <Box key={dog.image} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 1 }}>
+                  <Avatar
+                    src={dog.image}
+                    sx={{ width: 100, height: 100 }}
+                    alt="Imagen Avatar"
+                    style={{ marginRight: "10px" }}
+                  />
+                  <Typography variant="subtitle1" sx={{ mt: 1 }}>
+                    {dog.name}
+                  </Typography>
+                  <Button onClick={() => moveFromRejectedToAccepted(dog)}>Match</Button>
                 </Box>
               ))}
             </Paper>
