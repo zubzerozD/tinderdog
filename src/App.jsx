@@ -11,6 +11,7 @@ function App() {
   const [acceptedDogs, setAcceptedDogs] = useState([]);
   const [dogBreeds, setDogBreeds] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [dogName, setDogName] = useState('');
 
   useEffect(() => {
     setLoading(true);
@@ -24,13 +25,31 @@ function App() {
 
   const getDog = () => {
     setLoading(true);
+    const randomBreedIndex = Math.floor(Math.random() * dogBreeds.length);
+    const randomBreed = dogBreeds[randomBreedIndex];
     fetch('https://dog.ceo/api/breeds/image/random')
       .then((res) => res.json())
       .then((data) => {
+        
         setImgdog(data.message);
+        setDogName(dogBreeds[randomBreedIndex]);
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    setLoading(true);
+    fetch('https://dog.ceo/api/breeds/list/all')
+      .then((res) => res.json())
+      .then((data) => {
+        setDogBreeds(Object.keys(data.message));
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error al obtener las razas de perros:', error);
+        setLoading(false);
+      });
+  }, []);
 
   const spinner = (
     <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
@@ -38,10 +57,9 @@ function App() {
     </Box>
   );
 
-
   useEffect(() => {
     getDog();
-  }, []);
+  }, [dogBreeds]);
 
   const handleReject = () => {
     const randomBreed = dogBreeds[Math.floor(Math.random() * dogBreeds.length)].substring(0, 6);
@@ -71,8 +89,11 @@ function App() {
 
   const content = (
     <>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 1 }}>
-        <img src={imgdog} alt="dog" style={{ width: '200px', height: 200 }} />
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 1, flexDirection: "column" }}>
+      <img src={imgdog} alt={dogName} style={{ width: '200px', height: 200 }} />
+        <Typography variant="h5" gutterBottom>
+        {dogName}
+        </Typography>
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 1 }}>
         <Button variant="contained" onClick={handleReject} sx={{ mr: 2 }}>
