@@ -6,11 +6,16 @@ import { Box, Button, Grid, Paper, Typography, Avatar, ListItem, Container, Circ
 import logo from './img/dog.png'
 
 function App() {
-  const [imgdog, setImgdog] = useState('');
   const [rejectedDogs, setRejectedDogs] = useState([]);
   const [acceptedDogs, setAcceptedDogs] = useState([]);
   const [dogBreeds, setDogBreeds] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [dog, setDog] = useState({
+    name: "",
+    image: "",
+    description: "",
+  });
 
   useEffect(() => {
     setLoading(true);
@@ -24,12 +29,13 @@ function App() {
 
   const getDog = () => {
     setLoading(true);
-    fetch('https://dog.ceo/api/breeds/image/random')
-      .then((res) => res.json())
-      .then((data) => {
-        setImgdog(data.message);
-        setLoading(false);
-      });
+    axios.get('https://dog.ceo/api/breeds/image/random').then((res) => {
+      setDog({
+        name: dogBreeds[Math.floor(Math.random() * dogBreeds.length)].substring(0, 6),
+        image: res.data.message });
+      setLoading(false);
+    });
+
   };
 
   const spinner = (
@@ -44,16 +50,12 @@ function App() {
   }, []);
 
   const handleReject = () => {
-    const randomBreed = dogBreeds[Math.floor(Math.random() * dogBreeds.length)].substring(0, 6);
-    const rejectedDog = { name: randomBreed, image: imgdog };
-    setRejectedDogs([...rejectedDogs, rejectedDog]);
+    setRejectedDogs([...rejectedDogs, dog]);
     getDog();
   };
 
   const handleAccept = () => {
-    const randomBreed = dogBreeds[Math.floor(Math.random() * dogBreeds.length)].substring(0, 6);
-    const acceptedDog = { name: randomBreed, image: imgdog };
-    setAcceptedDogs([...acceptedDogs, acceptedDog]);
+    setAcceptedDogs([...acceptedDogs, dog]);
     getDog();
   };
 
@@ -72,8 +74,11 @@ function App() {
   const content = (
     <>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 1 }}>
-        <img src={imgdog} alt="dog" style={{ width: '200px', height: 200 }} />
+        <img src={dog.image} alt="dog" style={{ width: '200px', height: 200 }} />
       </Box>
+      <Typography>
+        {dog.name}
+      </Typography>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 1 }}>
         <Button variant="contained" onClick={handleReject} sx={{ mr: 2 }}>
           Rechazar
