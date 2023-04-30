@@ -1,6 +1,7 @@
 import { useQuery } from "react-query";
 import axios from "axios";
-
+import { LoremIpsum } from "react-lorem-ipsum";
+import { get } from "react-hook-form";
 
 export function useGetDog() {
     return useQuery(["getDog"], getDog, {
@@ -23,7 +24,12 @@ export const getDog = async () => {
     return {
         name: dogBreeds[Math.floor(Math.random() * dogBreeds.length)].substring(0, 6),
         image: data.message,
-        description: ""
+        description: (<LoremIpsum
+            p={2}
+            avgWordsPerSentence={1}
+            avgSentencesPerParagraph={1}
+            startWithLoremIpsum={false}
+        />)
     };
 };
 

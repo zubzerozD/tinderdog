@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import axios from "axios";
 import { Box, Button, Grid, Paper, Typography, Avatar, ListItem, Container, CircularProgress } from '@mui/material';
 
 import logo from './img/dog.png'
@@ -14,9 +13,9 @@ function App() {
 
   const {
     data: moreDog,
-    isFetching: loadings,
+    //isFetching: loadings,
     refetch: reload,
-    isError: error,
+    //isError: error,
   } = useGetDog();
 
   const spinner = (
@@ -57,17 +56,16 @@ function App() {
       <Typography>
         {moreDog?.name}
       </Typography>
+      <Typography>
+        {moreDog?.description}
+      </Typography>
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 1 }}>
-        <Button variant="contained" onClick={handleReject} sx={{ mr: 2 }}>
-          Rechazar
-        </Button>
-        <Button variant="contained" onClick={handleAccept}>
-          Match
-        </Button>
+        <button className='button-X' variant="contained" onClick={handleReject} sx={{ mr: 2 }}/>
+        <button className='button-Match' variant="contained" onClick={handleAccept}/>
       </Box>
     </>
   );
-
+  console.log(moreDog)
   return (
     <Container className="background">
       <Grid container spacing={3}>
@@ -132,5 +130,6 @@ function App() {
     </Container>
   );
 }
+
 
 export default App
