@@ -21,9 +21,9 @@ export const getDog = async () => {
     const { data } = await axios.get("https://dog.ceo/api/breeds/image/random");
     const dogBreeds = await getDogBreeds();
     return {
-        nombre: dogBreeds[Math.floor(Math.random() * dogBreeds.length)].substring(0, 6),
-        imagen: data.message,
-        descripcion: ""
+        name: dogBreeds[Math.floor(Math.random() * dogBreeds.length)].substring(0, 6),
+        image: data.message,
+        description: ""
     };
 };
 

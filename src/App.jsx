@@ -10,7 +10,6 @@ import { useGetDog } from "../quary/Quary.jsx";
 function App() {
   const [rejectedDogs, setRejectedDogs] = useState([]);
   const [acceptedDogs, setAcceptedDogs] = useState([]);
-  const [dogBreeds, setDogBreeds] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const {
@@ -28,14 +27,16 @@ function App() {
 
   const handleReject = () => {
     setRejectedDogs([...rejectedDogs, moreDog]);
-    reload();
+    setLoading(true);
+    reload().finally(() => setLoading(false));
   };
 
   const handleAccept = () => {
     setAcceptedDogs([...acceptedDogs, moreDog]);
-    reload();
+    setLoading(true);
+    reload().finally(() => setLoading(false));
   };
-moreDog
+
   const moveFromRejectedToAccepted = (moreDog) => {
     const newRejectedDogs = rejectedDogs.filter((d) => d !== moreDog);
     setRejectedDogs(newRejectedDogs);
@@ -96,9 +97,9 @@ moreDog
                     style={{ marginRight: "10px" }}
                   />
                   <Typography variant="subtitle1" sx={{ mt: 1 }}>
-                    {dog.name}
+                    {moreDog?.name}
                   </Typography>
-                  <Button onClick={() => moveFromAcceptedToRejected(dog)}>Rechazar</Button>
+                  <Button onClick={() => moveFromAcceptedToRejected(moreDog)}>Rechazar</Button>
                 </Box>
               ))}
             </Paper>
@@ -121,7 +122,7 @@ moreDog
                   <Typography variant="subtitle1" sx={{ mt: 1 }}>
                     {moreDog?.name}
                   </Typography>
-                  <Button onClick={() => moveFromRejectedToAccepted(dog)}>Match</Button>
+                  <Button onClick={() => moveFromRejectedToAccepted(moreDog)}>Match</Button>
                 </Box>
               ))}
             </Paper>
