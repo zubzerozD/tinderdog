@@ -26,9 +26,9 @@ export const getDog = async () => {
         image: data.message,
         description: (<LoremIpsum
             p={2}
-            avgWordsPerSentence={1}
-            avgSentencesPerParagraph={1}
             startWithLoremIpsum={false}
+            avgWordsPerSentence={3}
+            avgSentencesPerParagraph={2}
         />)
     };
 };

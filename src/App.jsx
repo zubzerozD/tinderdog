@@ -49,9 +49,9 @@ function App() {
   };
 
   const content = (
-    <>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 1 }}>
-        <img src={moreDog?.image} alt="dog" style={{ width: '200px', height: 200 }} />
+    <Box>
+      <Box>
+        <img src={moreDog?.image} alt="dog" style={{ width: '200px', height: '200px' }} />
       </Box>
       <Typography>
         {moreDog?.name}
@@ -59,38 +59,45 @@ function App() {
       <Typography>
         {moreDog?.description}
       </Typography>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: 1 }}>
-        <button className='button-X' variant="contained" onClick={handleReject} sx={{ mr: 2 }}/>
-        <button className='button-Match' variant="contained" onClick={handleAccept}/>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <button className='button-X' variant="contained" onClick={handleReject} sx={{ mr: 2 }} />
+        <button className='button-Match' variant="contained" onClick={handleAccept} />
       </Box>
-    </>
+    </Box>
   );
   console.log(moreDog)
   return (
     <Container className="background">
-      <Grid container spacing={3}>
-        <Grid style={{}} item xs={12} sm={4}>
-          <Paper style={{ opacity: 0.9, borderRadius: 25, height: 555, width: 165 }} sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', mt: 7 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', mt: -2 }}>
+
+      {/* Contenedor */}
+      <Box className="contenido">
+
+        {/* Columna perfiles */}
+        <Box className="columna profile">
+
+          <Box >
+            <Box >
               <img className="logo" src={logo} alt="zd" />
             </Box>
             <Typography variant="h5" gutterBottom>
               Encuentra tu perro
             </Typography>
             {loading ? spinner : content}
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <ListItem className="list-item">
-            <Paper style={{ opacity: 0.9, height: 550, overflowY: "auto", borderRadius: 25 }} sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', mt: 7 }}>
-              <Typography variant="h5" gutterBottom>
-                Aceptados
+          </Box>
+        </Box>
+
+        {/* Columna Aceptados */}
+        <Box className="columna aceptados">
+          <ListItem className='lista'>
+            <Box className='contenidos-aceptados'>
+              <Typography variant="h5" >
+                  Aceptados
               </Typography>
               {acceptedDogs.map((moreDog) => (
                 <Box key={moreDog?.image} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 1 }}>
                   <Avatar
                     src={moreDog?.image}
-                    sx={{ width: 100, height: 100 }}
+                    sx={{ width: 130, height: 130 }}
                     alt="Imagen Avatar"
                     style={{ marginRight: "10px" }}
                   />
@@ -100,12 +107,15 @@ function App() {
                   <Button onClick={() => moveFromAcceptedToRejected(moreDog)}>Rechazar</Button>
                 </Box>
               ))}
-            </Paper>
+            </Box>
           </ListItem>
-        </Grid>
-        <Grid item xs={12} sm={4}>
-          <ListItem className="list-item">
-            <Paper style={{ opacity: 0.9, height: 550, overflowY: "auto", borderRadius: 25 }} sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%', mt: 7 }}>
+        </Box>
+
+        {/* Columna Rechazados */}
+        <Box className="columna rechazados">
+          <ListItem className='lista'>
+
+            <Box className='contenidos-rechazados'>
               <Typography variant="h5" gutterBottom>
                 Rechazados
               </Typography>
@@ -113,7 +123,7 @@ function App() {
                 <Box key={moreDog?.image} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 1 }}>
                   <Avatar
                     src={moreDog?.image}
-                    sx={{ width: 100, height: 100 }}
+                    sx={{ width: 130, height: 130 }}
                     alt="Imagen Avatar"
                     style={{ marginRight: "10px" }}
                   />
@@ -123,10 +133,13 @@ function App() {
                   <Button onClick={() => moveFromRejectedToAccepted(moreDog)}>Match</Button>
                 </Box>
               ))}
-            </Paper>
+            </Box>
+
           </ListItem>
-        </Grid>
-      </Grid>
+        </Box>
+
+      </Box>
+
     </Container>
   );
 }
