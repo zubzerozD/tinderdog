@@ -1,5 +1,8 @@
 #root {
-  max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  background-color: #242424;
+  color: rgba(255, 255, 255, 0.87);
   margin: 0 auto;
   padding: 2rem;
 }
@@ -16,6 +19,54 @@
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #e1097caa);
 }
+
+.nameDog{
+  margin-top: 2rem;
+  font-size: 32px;
+  font-weight: 900;
+}
+
+.lotum{
+  justify-content: center;
+  align-items: center;
+}
+
+.liked_top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  height: 3rem;
+  z-index: 2;
+  padding: 1.2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+}
+
+.liked_top img {
+  height: 5rem;
+  width: 5rem;
+}
+
+.X-liked_top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  height: 3rem;
+  z-index: 2;
+  padding: 1.2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+}
+
+.X-liked_top img {
+  height: 4rem;
+  width: 4.5rem;
+}
+
 
 .background {
   background-image: url('./img/fondo-romantico-de-perros.png');

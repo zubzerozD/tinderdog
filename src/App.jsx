@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { Box, Button, Grid, Paper, Typography, Avatar, ListItem, Container, CircularProgress } from '@mui/material';
+import profileMore from '../profile/profile';
 
+//Logo
 import logo from './img/dog.png'
 
+//Query del perro
 import { useGetDog } from "../quary/Quary.jsx";
 
 function App() {
@@ -39,33 +42,35 @@ function App() {
   const moveFromRejectedToAccepted = (moreDog) => {
     const newRejectedDogs = rejectedDogs.filter((d) => d !== moreDog);
     setRejectedDogs(newRejectedDogs);
-    setAcceptedDogs([...acceptedDogs, moreDog]);
+    setAcceptedDogs([moreDog, ...acceptedDogs]);
   };
 
   const moveFromAcceptedToRejected = (moreDog) => {
     const newAcceptedDogs = acceptedDogs.filter((d) => d !== moreDog);
     setAcceptedDogs(newAcceptedDogs);
-    setRejectedDogs([...rejectedDogs, moreDog]);
+    setRejectedDogs([moreDog, ...rejectedDogs]);
   };
 
+  //Contenido de cargar
   const content = (
     <Box>
-      <Box>
+      <Box className="caja">
         <img src={moreDog?.image} alt="dog" style={{ width: '200px', height: '200px' }} />
       </Box>
-      <Typography>
-        {moreDog?.name}
+      <Typography className='nameDog'>
+        Nombre: {moreDog?.name}
       </Typography>
-      <Typography>
-        {moreDog?.description}
+      <Typography className='lotum'>
+        Descripcion:{moreDog?.description}
       </Typography>
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <button className='button-X' variant="contained" onClick={handleReject} sx={{ mr: 2 }} />
         <button className='button-Match' variant="contained" onClick={handleAccept} />
       </Box>
     </Box>
   );
-  console.log(moreDog)
+  //console.log(moreDog)
+
   return (
     <Container className="background">
 
@@ -88,10 +93,13 @@ function App() {
 
         {/* Columna Aceptados */}
         <Box className="columna aceptados">
+          <Box className="liked_top">
+            <img src="../src/img/dogLike.jpg" alt="liked" />
+          </Box>
           <ListItem className='lista'>
             <Box className='contenidos-aceptados'>
               <Typography variant="h5" >
-                  Aceptados
+                Aceptados
               </Typography>
               {acceptedDogs.map((moreDog) => (
                 <Box key={moreDog?.image} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 1 }}>
@@ -113,6 +121,9 @@ function App() {
 
         {/* Columna Rechazados */}
         <Box className="columna rechazados">
+          <Box className="X-liked_top">
+            <img src="../src/img/dogDislike.png" alt="X-liked"/>
+          </Box>
           <ListItem className='lista'>
 
             <Box className='contenidos-rechazados'>

@@ -27,8 +27,8 @@ export const getDog = async () => {
         description: (<LoremIpsum
             p={2}
             startWithLoremIpsum={false}
-            avgWordsPerSentence={3}
-            avgSentencesPerParagraph={2}
+            avgWordsPerSentence={2}
+            avgSentencesPerParagraph={1}
         />)
     };
 };
