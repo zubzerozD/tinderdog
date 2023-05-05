@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { Box, Button, Grid, Paper, Typography, Avatar, ListItem, Container, CircularProgress } from '@mui/material';
-import profileMore from '../profile/profile';
+import ProfileMore from '../profile/profile';
 
 //Logo
 import logo from './img/dog.png'
@@ -98,11 +98,8 @@ function App() {
           </Box>
           <ListItem className='lista'>
             <Box className='contenidos-aceptados'>
-              <Typography variant="h5" >
-                Aceptados
-              </Typography>
               {acceptedDogs.map((moreDog) => (
-                <Box key={moreDog?.image} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 1 }}>
+                <Box className="aD" key={moreDog?.image} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4 }}>
                   <Avatar
                     src={moreDog?.image}
                     sx={{ width: 130, height: 130 }}
@@ -112,7 +109,8 @@ function App() {
                   <Typography variant="subtitle1" sx={{ mt: 1 }}>
                     {moreDog?.name}
                   </Typography>
-                  <Button onClick={() => moveFromAcceptedToRejected(moreDog)}>Rechazar</Button>
+                  <button className='button_AtoR' onClick={() => moveFromAcceptedToRejected(moreDog)}></button>
+                  <ProfileMore data={moreDog}></ProfileMore>
                 </Box>
               ))}
             </Box>
@@ -127,11 +125,8 @@ function App() {
           <ListItem className='lista'>
 
             <Box className='contenidos-rechazados'>
-              <Typography variant="h5" gutterBottom>
-                Rechazados
-              </Typography>
               {rejectedDogs.map((moreDog) => (
-                <Box key={moreDog?.image} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 1 }}>
+                <Box className="rD" key={moreDog?.image} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 4 }}>
                   <Avatar
                     src={moreDog?.image}
                     sx={{ width: 130, height: 130 }}
@@ -141,7 +136,8 @@ function App() {
                   <Typography variant="subtitle1" sx={{ mt: 1 }}>
                     {moreDog?.name}
                   </Typography>
-                  <Button onClick={() => moveFromRejectedToAccepted(moreDog)}>Match</Button>
+                  <button className='button_RtoA' onClick={() => moveFromRejectedToAccepted(moreDog)}></button>
+                  <ProfileMore data={moreDog}></ProfileMore>
                 </Box>
               ))}
             </Box>

@@ -31,11 +31,26 @@
   align-items: center;
 }
 
+
+.profileName{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color:#242424;
+  text-shadow: #242424;
+  margin: auto;
+}
+
+.profileDescp{
+  color:#242424;
+  text-shadow: #242424;
+}
+
 .liked_top {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: sticky;
+  position: sticky; /*Fija la caja*/
   top: 0;
   height: 3rem;
   z-index: 2;
@@ -101,8 +116,8 @@
   cursor: pointer;
 }
 
-.button-AtoR{
-  background-image: url('./img/arrow-right.png');
+.button_AtoR{
+  background-image: url('./img/AtoR.jpeg');
   background-color: rgb(255, 255, 255);
   background-size: cover;
   background-position: center;
@@ -114,17 +129,35 @@
   cursor: pointer;
 }
 
-.button-RtoA {
-  background-image: url('./img/arrow-left.png');
+.button_RtoA {
+  background-image: url('./img/RtoA.jpeg');
   background-color: rgb(255, 255, 255);
   background-size: cover;
   background-position: center;
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 100%;
   border: none;
   margin: 0.5em;
   cursor: pointer;
+}
+
+.button_more{
+  background-image: url('./img/AS-Web-button-Dog-Info.jpg');
+  background-color: rgb(255, 255, 255);
+  background-size: cover;
+  background-position: center;
+  width: 250px;
+  height: 55px;
+  border: none;
+  margin: 0.5em;
+  cursor: pointer;
+}
+.Information{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400;
 }
 
 @keyframes logo-spin {

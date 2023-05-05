@@ -1,40 +1,34 @@
 import * as React from "react";
-import {Modal, Box } from "@mui/material";
+import {Modal, Box, Button } from "@mui/material";
 
-const style = {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
+const info_box = {
     transform: "translate(-50%, -50%)",
-    width: 400,
     bgcolor: "background.paper",
-    border: "2px solid #000",
-    boxShadow: 24,
-    p: 4,
+    p: 2,
 };
 
-const styleImg = {
+const styleImge = {
     width: "100%",
-    height: "40rem",
+    height: "20rem",
 };
 
 export default function profileMore({ data }) {
-    const { name,image,description} = data;
     const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
+    const handleClickOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const { name,image,description} = data;
 
     return (
         <div>
-            <button title="Ver perfil" className="btn-info" onClick={handleOpen}></button>
+            <Button className="button_more" onClick={handleClickOpen}></Button>
             <Modal open={open} onClose={handleClose}>
-                <Box sx={style}>
-                    <img style={styleImg} src={image}/>
-                    <Box className='profile' sx={{ color: "black" }}>
-                        {name}
+                <Box className="Information" sx={info_box}>
+                    <img style={styleImge} src={image}/>
+                    <Box className='profileName'>
+                        Nombre: {name}
                     </Box>
-                    <Box sx={{ color: "black" }}>
-                        {description}
+                    <Box className='profileDescp'>
+                        Descripcion:{description}
                     </Box>
                 </Box>
             </Modal>
